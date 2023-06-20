@@ -33,6 +33,7 @@ app.post( '/students ', function(req, res) {
   var str = ISON.stringify(obj, null, 2);
   const fs = require( 'fs');
   const dir = 'students';
+}
 
   fs.access(dir, (err) => {
     if (err) {
@@ -442,4 +443,4 @@ console.log('Server is running...');
 module.exports = {
   server: server,
   app: app
-}
+  }
