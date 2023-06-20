@@ -45,8 +45,8 @@ app.post( '/students ', function(req, res) {
         }
       });
     } else {
-      console.log( 'Directory already exists!');
-  }
+      console.log('Directory already exists!');
+    }
     
     if (checkStudentExists(dir, obj, req.body.first_name, req.body.last_name)) {
       console.log("Duplicate student");
