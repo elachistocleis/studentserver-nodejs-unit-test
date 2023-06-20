@@ -31,7 +31,7 @@ app.post( '/students ', function(req, res) {
   obj.enrolled = req.body.enrolled;
 
   var str = ISON.stringify(obj, null, 2);
-  const fs = require( 'fs');
+  const fs = require('fs');
   const dir = 'students';
 }
 
@@ -68,7 +68,7 @@ app.post( '/students ', function(req, res) {
         }
       });
     }
-  });
+  }));
 // End post method//
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
