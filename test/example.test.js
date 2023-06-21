@@ -89,7 +89,7 @@ describe("GET /students/{record_id}", () => {
 describe("POST /students", () => {
     var response
     beforeAll(async () => {
-        response = await request(baseURL).post('/students').send(data);
+        response_dup = await request(baseURL).post('/students').send(data);
     });
 
 
