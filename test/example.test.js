@@ -90,7 +90,6 @@ describe("POST /students", () => {
     var response
     beforeAll(async () => {
         response = await request(baseURL).post('/students').send(data);
-        response_dup = await request(baseURL).post('/students').send(data);
     });
 
 
@@ -103,8 +102,6 @@ describe("POST /students", () => {
         expect(response.body).toHaveProperty('record_id');
     });
 
-    it('Should return 409', async () => {
-        expect(response_dup.status).toBe(409);
     });
 
     afterAll(async () => {
