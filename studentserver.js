@@ -69,7 +69,7 @@ app.use((req, res, next) => {
  *       201:
  *         description: Success. The student object has been created.
  */
-/** 
+
 app.post('/students', function (req, res) {//creates a new student obj with all of it's attributes.
 
   var record_id = new Date().getTime();
@@ -118,7 +118,7 @@ app.post('/students', function (req, res) {//creates a new student obj with all 
 
 
 }); 
-/*
+
 //end post method
 
 /**
