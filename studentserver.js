@@ -199,7 +199,10 @@ app.post('/students', function (req, res) {//creates a new student obj with all 
         }
       }) //end writeFile method
     } else {
+      var rsp_obj = {};
       console.log("Student exists")
+      rsp_obj.message = 'Student Exists';
+      return resizeTo.status(409).send(rsp_obj);
     }
   })
 
