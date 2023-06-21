@@ -1,4 +1,4 @@
-const request = require('supertest')
+cconst request = require('supertest')
 const {
     app,
     server
@@ -19,7 +19,7 @@ afterAll((done) => {
     });
 
 });
- 
+
 describe('GET /students', () => {
     var response
 
@@ -67,7 +67,7 @@ describe("GET /students/{record_id}", () => {
 
     beforeAll(async () => {
         response = await request(baseURL).get('/students/1677444950300');
-        //console.dir(response)
+        console.dir(response)
     });
 
     it('should return a 200 status', async () => {
@@ -93,15 +93,13 @@ describe("POST /students", () => {
     });
 
 
-    it('Should return 409', async () => {
-        expect(response.status).toBe(409);
+    it('Should return 201', async () => {
+        expect(response.status).toBe(201);
     });
 
     it('Should have message, and record_id', async () => {
         expect(response.body).toHaveProperty('message');
         expect(response.body).toHaveProperty('record_id');
-    });
-
     });
 
     afterAll(async () => {
