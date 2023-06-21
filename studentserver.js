@@ -69,7 +69,6 @@ app.use((req, res, next) => {
  *       201:
  *         description: Success. The student object has been created.
  */
-
 app.post('/students', function (req, res) {//creates a new student obj with all of it's attributes.
 
   var record_id = new Date().getTime();
@@ -117,102 +116,7 @@ app.post('/students', function (req, res) {//creates a new student obj with all 
   })
 
 
-}); 
-
-//end post method
-
-/**
- * @swagger 
- * /students: Objetive 2, this request update code status 200 for 409.
- *   post:
- *     summary: Creates a new student object with all of its attributes.
- *     description: Use this endpoint to create a new student.
- *     parameters:
- *       - name: first_name
- *         description: Student's first name
- *         in: formData
- *         required: true
- *         schema:
- *           type: string
- *       - name: last_name
- *         description: Student's last name
- *         in: formData
- *         required: true
- *         schema:
- *           type: string
- *       - name: gpa
- *         description: Student's GPA
- *         in: formData
- *         required: true
- *         schema:
- *           type: string
- *       - name: enrolled
- *         description: Student's enrolled status
- *         in: formData
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       409:
- *         description: Unable to create resource.
- *       201:
- *         description: Success. The student object has been created.
- */
-app.post('/students', function (req, res) {//creates a new student obj with all of it's attributes.
-
-  var record_id = new Date().getTime();
-
-  var obj = {};
-  obj.record_id = record_id;
-  obj.first_name = req.body.first_name;
-  obj.last_name = req.body.last_name;
-  obj.gpa = req.body.gpa;
-  obj.enrolled = req.body.enrolled;
-
-  var str = JSON.stringify(obj, null, 2);
-  const fs = require('fs');
-
-  const dir = 'students';
-
-  fs.access(dir, (err) => {
-    if (err) {
-      fs.mkdir(dir, (err) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log('Directory created successfully!');
-        }
-      });
-    } else {
-      console.log('Directory already exists!');
-    }
-    if (checkStudentExists() == false) {
-      fs.writeFile("students/" + record_id + ".json", str, function (err) {//writes to the students directory
-        var rsp_obj = {};
-        if (err) {
-          rsp_obj.record_id = -1;
-          rsp_obj.message = 'error - unable to create resource';
-          return res.status(400).send(rsp_obj);
-        } else {
-          rsp_obj.record_id = record_id;
-          rsp_obj.message = 'successfully created';
-          return res.status(201).send(rsp_obj);
-        }
-      }) //end writeFile method
-    } else {
-      var rsp_obj = {};
-      console.log("Student exists")
-      rsp_obj.message = 'Student Exists';
-      return res.status(409).send(rsp_obj);
-    }
-  })
-
-
-}); 
-
-//end post method
-
-
+}); //end post method
 /**
  * @swagger
  * /students/{recordid}:
