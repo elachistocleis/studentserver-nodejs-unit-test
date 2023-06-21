@@ -103,7 +103,7 @@ app.post('/students', function (req, res) {//creates a new student obj with all 
         if (err) {
           rsp_obj.record_id = -1;
           rsp_obj.message = 'error - unable to create resource';
-          return res.status(200).send(rsp_obj);
+          return res.status(409).send(rsp_obj);
         } else {
           rsp_obj.record_id = record_id;
           rsp_obj.message = 'successfully created';
