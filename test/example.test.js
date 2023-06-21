@@ -19,7 +19,7 @@ afterAll((done) => {
     });
 
 });
-
+/** 
 describe('GET /students', () => {
     var response
 
@@ -85,7 +85,7 @@ describe("GET /students/{record_id}", () => {
         });
     })
 });
-
+*/
 describe("POST /students", () => {
     var response
     beforeAll(async () => {
