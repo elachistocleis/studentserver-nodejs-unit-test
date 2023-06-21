@@ -117,6 +117,57 @@ app.post('/students', function (req, res) {//creates a new student obj with all 
 
 
 }); //end post method
+
+
+//Start New Post Method
+app.post('/students', function (req, res) {//creates a new student obj with all of it's attributes.
+
+  var record_id = new Date().getTime();
+
+  var obj = {};
+  obj.record_id = record_id;
+  obj.first_name = req.body.first_name;
+  obj.last_name = req.body.last_name;
+  obj.gpa = req.body.gpa;
+  obj.enrolled = req.body.enrolled;
+
+  var str = JSON.stringify(obj, null, 2);
+  const fs = require('fs');
+
+  const dir = 'students';
+
+  fs.access(dir, (err) => {
+    if (err) {
+      fs.mkdir(dir, (err) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log('Directory created successfully!');
+        }
+      });
+    } else {
+      console.log('Directory already exists!');
+    }
+    if (checkStudentExists() == false) {
+      fs.writeFile("students/" + record_id + ".json", str, function (err) {//writes students directory
+        var rsp_obj = {};
+        if (err) {
+          rsp_obj.record_id = -1;
+          rsp_obj.message = 'error - unable to create resource';
+          return res.status(409).send(rsp_obj);
+        } else {
+          rsp_obj.record_id = record_id;
+          rsp_obj.message = 'successfully created';
+          return res.status(201).send(rsp_obj);
+        }
+      }) //end writeFile method
+    } else {
+      console.log("Student exists")
+    }
+  })
+
+
+}); //end post method
 /**
  * @swagger
  * /students/{recordid}:
