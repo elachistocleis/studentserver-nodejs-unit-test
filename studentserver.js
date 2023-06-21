@@ -20,57 +20,6 @@ const swaggerOptions = {
 
 };
 
-//*Create student in studentserver code to return correct codes - HW4*//
-app.post( '/students ', function(req, res) {
-  var record_id = new Date().getTime();
-  var obj = {};
-  obj.record_id = record_id;
-  obj.first_name = req.body.first_name;
-  obj.last_name = req.body.last_name;
-  obj.gpa = req.body.gpa;
-  obj.enrolled = req.body.enrolled;
-
-  var str = ISON.stringify(obj, null, 2);
-  const fs = require('fs');
-  const dir = 'students';
-}
-
-  fs.access(dir, (err) => {
-    if (err) {
-      fs.mkdir(dir, (err) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log( 'Directory created successfully!');
-        }
-      });
-    } else {
-      console.log('Directory already exists!');
-    }
-    
-    if (checkStudentExists(dir, obj, req.body.first_name, req.body.last_name)) {
-      console.log("Duplicate student");
-      var rsp_obj = {};
-      rsp_obj.record_id = -1;
-      rsp_obj .message = 'error - duplicate student';
-      return res.status(409).send(rsp_obj);
-    } else {
-      fs.writeFile("students/" + record_id + ".json", str, function(err) {
-        var rsp_obj = {};
-        if(err) {
-          rsp_obj.record_id = -1;
-          rsp_obj .message = 'error - unable to create resource';
-          return res.status(409).send(rsp_obj);
-        } else {
-          rsp_obj.record_id = record_id;
-          rsp_obj .message = 'successfully created';
-          return res.status(201).send(rsp_obj);
-        }
-      });
-    }
-  }));
-// End post method//
-
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 
@@ -195,9 +144,9 @@ app.get('/students/:record_id', function (req, res) {
       var rsp_obj = {};
       rsp_obj.record_id = record_id;
       rsp_obj.message = 'error - resource not found';
-      return res.status(409).send(rsp_obj);
+      return res.status(404).send(rsp_obj);
     } else {
-      return res.status(201).send(data);
+      return res.status(200).send(data);
     }
   });
 });
@@ -443,4 +392,4 @@ console.log('Server is running...');
 module.exports = {
   server: server,
   app: app
-  }
+}
