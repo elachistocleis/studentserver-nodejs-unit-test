@@ -146,7 +146,7 @@ app.get('/students/:record_id', function (req, res) {
       rsp_obj.message = 'error - resource not found';
       return res.status(404).send(rsp_obj);
     } else {
-      return res.status(200).send(data);
+      return res.status(201).send(data);
     }
   });
 });
