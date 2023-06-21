@@ -67,7 +67,7 @@ describe("GET /students/{record_id}", () => {
 
     beforeAll(async () => {
         response = await request(baseURL).get('/students/1677444950300');
-        console.dir(response)
+        //console.dir(response)
     });
 
     it('should return a 200 status', async () => {
