@@ -89,7 +89,7 @@ describe("GET /students/{record_id}", () => {
 describe("POST /students", () => {
     var response
     beforeAll(async () => {
-        response_dup = await request(baseURL).post('/students').send(data);
+        response = await request(baseURL).post('/students').send(data);
     });
 
 
@@ -97,17 +97,11 @@ describe("POST /students", () => {
         expect(response.status).toBe(201);
     });
 
-
     it('Should have message, and record_id', async () => {
         expect(response.body).toHaveProperty('message');
         expect(response.body).toHaveProperty('record_id');
     });
 
-    /** 
-    it('Should return 409', async () => {
-        expect(response_dup.status).toBe(409);
-    });
-    */
     afterAll(async () => {
         // Clean up the newly created student
         let student = response.body['record_id']
