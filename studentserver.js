@@ -116,10 +116,47 @@ app.post('/students', function (req, res) {//creates a new student obj with all 
   })
 
 
-}); //end post method
+}); 
 
+//end post method
 
-//Start New Post Method for HW4//
+/**
+ * @swagger 
+ * /students: Objetive 2, this request update code status 200 for 409.
+ *   post:
+ *     summary: Creates a new student object with all of its attributes.
+ *     description: Use this endpoint to create a new student.
+ *     parameters:
+ *       - name: first_name
+ *         description: Student's first name
+ *         in: formData
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - name: last_name
+ *         description: Student's last name
+ *         in: formData
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - name: gpa
+ *         description: Student's GPA
+ *         in: formData
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - name: enrolled
+ *         description: Student's enrolled status
+ *         in: formData
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       409:
+ *         description: Unable to create resource.
+ *       201:
+ *         description: Success. The student object has been created.
+ */
 app.post('/students', function (req, res) {//creates a new student obj with all of it's attributes.
 
   var record_id = new Date().getTime();
@@ -149,7 +186,7 @@ app.post('/students', function (req, res) {//creates a new student obj with all 
       console.log('Directory already exists!');
     }
     if (checkStudentExists() == false) {
-      fs.writeFile("students/" + record_id + ".json", str, function (err) {//writes students directory
+      fs.writeFile("students/" + record_id + ".json", str, function (err) {//writes to the students directory
         var rsp_obj = {};
         if (err) {
           rsp_obj.record_id = -1;
@@ -167,7 +204,11 @@ app.post('/students', function (req, res) {//creates a new student obj with all 
   })
 
 
-}); //end post method
+}); 
+
+//end post method
+
+
 /**
  * @swagger
  * /students/{recordid}:
