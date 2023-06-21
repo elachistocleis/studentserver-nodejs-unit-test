@@ -102,6 +102,10 @@ describe("POST /students", () => {
         expect(response.body).toHaveProperty('record_id');
     });
 
+    it('Should return 409', async () => {
+        expect(response_dup.status).toBe(409);
+    });
+
     afterAll(async () => {
         // Clean up the newly created student
         let student = response.body['record_id']
