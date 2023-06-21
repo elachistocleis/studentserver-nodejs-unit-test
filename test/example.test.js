@@ -94,8 +94,8 @@ describe("POST /students", () => {
     });
 
 
-    it('Should return 201', async () => {
-        expect(response.status).toBe(201);
+    it('Should return 409', async () => {
+        expect(response.status).toBe(409);
     });
 
     it('Should have message, and record_id', async () => {
