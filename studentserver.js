@@ -82,7 +82,7 @@ app.post('/students', function (req, res) {//creates a new student obj with all 
 
   var str = JSON.stringify(obj, null, 2);
   
-  if (checkStudentExists(obj.first_name, obj.last_name) = false) {
+  if (checkStudentExists(obj.first_name, obj.last_name) == false) {
     fs.writeFile("students/" + record_id + ".json", str, function (err) {//writes to the students directory
       var rsp_obj = {};  
       if (err) {
